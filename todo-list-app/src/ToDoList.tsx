@@ -10,7 +10,7 @@ import {
   Stack,
   Dialog,
 } from "@mui/material";
-import { ToDoCard, CardProps } from "./ToDoCard";
+import { ToDoCard } from "./ToDoCard";
 
 interface ITodo {
   id: string;
@@ -125,6 +125,7 @@ const ToDoList: FC = () => {
         } else {
           // Find the index of the hovered card in the todos array with the new status
           if (hoveredId === "0") {
+            console.log("Go up");
             todos[hoveredCardStatusIndex].items.unshift(draggedCard);
           } else {
             const hoveredCardIndex = todos[
@@ -147,6 +148,7 @@ const ToDoList: FC = () => {
         } else {
           // Find the index of the hovered card in the todos array
           if (hoveredId === "0") {
+            console.log("Go up");
             todos[draggedCardStatusIndex].items.unshift(draggedCard);
           } else {
             const hoveredCardIndex = todos[
@@ -175,6 +177,7 @@ const ToDoList: FC = () => {
   ) => {
     // Prevent the browser's default handling of the data
     event.preventDefault();
+
     setHoveredId(cardID);
 
     // Set the drop effect to "move"
@@ -339,6 +342,7 @@ const ToDoList: FC = () => {
         {/* To Do Column */}
         <Grid item xs={12} sm={4}>
           <div
+            key="column_ToDoList"
             className="column_ToDoList"
             onDrop={(event) => onCardDrop(event, "To Do")}
             onDragOver={(event) => handleDragOver(event, "0")}
@@ -354,9 +358,13 @@ const ToDoList: FC = () => {
                 if (todoGroup.todoStatus === "To Do") {
                   return todoGroup.items.map((todo, index) => (
                     <div
+                      key={todo.id}
                       ref={cardRef}
                       id={todo.id}
-                      onDragOver={(event) => handleDragOver(event, todo.id)}
+                      onDragOver={(event) => {
+                        event.stopPropagation();
+                        handleDragOver(event, todo.id);
+                      }}
                     >
                       <ToDoCard
                         key={todo.id}
@@ -365,14 +373,10 @@ const ToDoList: FC = () => {
                         title={todo.title}
                         description={todo.description}
                         status="To Do"
-                        open={openDialogTodo}
+                        open={false}
                         todosSource={todos}
                         fromSearch={false}
                         handleClickedCard={handleTodoChange}
-                        // handleClickedCard={() => {
-                        //   setOpenFullTodo(true);
-                        //   handleCardClick(todo, "In Progress", index);
-                        // }}
                       />
                     </div>
                   ));
@@ -385,6 +389,7 @@ const ToDoList: FC = () => {
         {/* In Progress Column */}
         <Grid item xs={12} sm={4}>
           <div
+            key="column_InProgress"
             className="column_InProgress"
             onDrop={(event) => onCardDrop(event, "In Progress")}
             onDragOver={(event) => handleDragOver(event, "0")}
@@ -400,9 +405,13 @@ const ToDoList: FC = () => {
                 if (todoGroup.todoStatus === "In Progress") {
                   return todoGroup.items.map((todo, index) => (
                     <div
+                      key={todo.id}
                       ref={cardRef}
                       id={todo.id}
-                      onDragOver={(event) => handleDragOver(event, todo.id)}
+                      onDragOver={(event) => {
+                        event.stopPropagation();
+                        handleDragOver(event, todo.id);
+                      }}
                     >
                       <ToDoCard
                         key={todo.id}
@@ -411,14 +420,10 @@ const ToDoList: FC = () => {
                         title={todo.title}
                         description={todo.description}
                         status="In Progress"
-                        open={openDialogTodo}
+                        open={false}
                         todosSource={todos}
                         fromSearch={false}
                         handleClickedCard={handleTodoChange}
-                        // handleClickedCard={() => {
-                        //   setOpenFullTodo(true);
-                        //   handleCardClick(todo, "In Progress", index);
-                        // }}
                       />
                     </div>
                   ));
@@ -431,6 +436,7 @@ const ToDoList: FC = () => {
         {/* Archived Column */}
         <Grid item xs={12} sm={4}>
           <div
+            key="column_Archived"
             className="column_Archived"
             onDrop={(event) => onCardDrop(event, "Archived")}
             onDragOver={(event) => handleDragOver(event, "0")}
@@ -446,9 +452,13 @@ const ToDoList: FC = () => {
                 if (todoGroup.todoStatus === "Archived") {
                   return todoGroup.items.map((todo, index) => (
                     <div
+                      key={todo.id}
                       ref={cardRef}
                       id={todo.id}
-                      onDragOver={(event) => handleDragOver(event, todo.id)}
+                      onDragOver={(event) => {
+                        event.stopPropagation();
+                        handleDragOver(event, todo.id);
+                      }}
                     >
                       <ToDoCard
                         key={todo.id}
@@ -457,14 +467,10 @@ const ToDoList: FC = () => {
                         title={todo.title}
                         description={todo.description}
                         status="Archived"
-                        open={openDialogTodo}
+                        open={false}
                         todosSource={todos}
                         fromSearch={false}
                         handleClickedCard={handleTodoChange}
-                        // handleClickedCard={() => {
-                        //   setOpenFullTodo(true);
-                        //   handleCardClick(todo, "In Progress", index);
-                        // }}
                       />
                     </div>
                   ));
