@@ -5,4 +5,6 @@ This is a project by Shafira Monica for TEMG4940C. To run this project, you can 
 
 ### `npm start`
 
-In this project, I developed an interactive To Do List website with features based on given user stories. I used Typescript, HTML, CSS, as well as React and Material UI library to built the components. Along the development, I utilized ChatGPT to help me write some codes based on my logics.
+To view from the public link, click here: https://hkust-temg4940c-fe.github.io/fe-asg-part1-shafirasya/
+
+In this project, I developed an interactive To Do List website with features based on given user stories. I used Typescript, HTML, CSS, as well as React and Material UI library to build the components. Along the development, I utilized ChatGPT to help me write some codes based on my logic.
